@@ -17,6 +17,7 @@ public class DepartmentDaoJDBC implements DepartmentDao{
 	// dependica de conecao ao bd
 		private Connection conn;
 	
+		// Construtor com parametro de conexao com BD
 	public DepartmentDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
@@ -29,7 +30,19 @@ public class DepartmentDaoJDBC implements DepartmentDao{
 
 	@Override
 	public void update(Department obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement("UPDATE department SET Name = ? WHERE Id = ?");
+			st.setString(1, obj.getName());
+			st.setInt(2, obj.getId());
+			
+			st.executeUpdate();
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 

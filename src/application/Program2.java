@@ -21,7 +21,7 @@ public class Program2 {
 		}
 		
 		System.out.println("\n=== TEST 2: findById ===");
-		Department dep = departmentDao.findById(2);
+		Department dep = departmentDao.findById(6);
 		System.out.println(dep);
 
 		System.out.println("\n=== TEST 3: delete department ===");
@@ -29,6 +29,15 @@ public class Program2 {
 		int id = sc.nextInt();
 		departmentDao.deletById(id);
 		System.out.println("Deleted ok!");
+		
+		System.out.println("\n=== TEST 4: update department ===");
+		dep = departmentDao.findById(2);
+		dep.setName("Shoes");
+		departmentDao.update(dep);
+		System.out.println("Update Ok!");
+		
+		
+		sc.close();
 	}
 
 }
